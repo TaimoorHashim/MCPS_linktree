@@ -1,7 +1,7 @@
 import { useState } from "react";
 import logo from './assets/logo.png';
 
- const links = [
+const links = [
   {
     id: "instagram",
     label: "Instagram",
@@ -35,16 +35,16 @@ import logo from './assets/logo.png';
     ),
   },
   {
-  id: "tiktok",
-  label: "Mind Care — TikTok",
-  url: "https://www.tiktok.com/@mindcareclinic.pk?_r=1&_t=ZS-94StFPqdss1",
-  icon: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" fill="#000"/>
-    </svg>
-  ),
-},
-{
+    id: "tiktok",
+    label: "Mind Care — TikTok",
+    url: "https://www.tiktok.com/@mindcareclinic.pk?_r=1&_t=ZS-94StFPqdss1",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" fill="#000"/>
+      </svg>
+    ),
+  },
+  {
     id: "linkedin",
     label: "LinkedIn",
     url: "https://linkedin.com/company/YOUR_LINKEDIN",
@@ -65,18 +65,18 @@ import logo from './assets/logo.png';
     ),
   },
   {
-  id: "gmail",
-  label: "Mind Care — Gmail",
-  url: "https://mail.google.com/mail/?view=cm&to=mindcareclinic.pk@gmail.com",
-  icon: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2 4h20v16H2z" fill="#fff" stroke="#e0e0e0" strokeWidth="1"/>
-      <path d="M2 4l10 9 10-9" stroke="#EA4335" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M2 4v16h4V10l6 5 6-5v10h4V4" fill="#fff"/>
-      <path d="M2 4l10 9 10-9" fill="none"/>
-    </svg>
-  ),
-},
+    id: "gmail",
+    label: "Mind Care — Gmail",
+    url: "https://mail.google.com/mail/?view=cm&to=mindcareclinic.pk@gmail.com",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 4h20v16H2z" fill="#fff" stroke="#e0e0e0" strokeWidth="1"/>
+        <path d="M2 4l10 9 10-9" stroke="#EA4335" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M2 4v16h4V10l6 5 6-5v10h4V4" fill="#fff"/>
+        <path d="M2 4l10 9 10-9" fill="none"/>
+      </svg>
+    ),
+  },
   {
     id: "website",
     label: "Mind Care — Official Website",
@@ -102,7 +102,8 @@ import logo from './assets/logo.png';
   },
 ];
 
-const styles = {
+// ✅ FIX: type as React.CSSProperties to prevent TS1005 errors on CSS literal values
+const styles: { [key: string]: React.CSSProperties } = {
   page: {
     minHeight: "100vh",
     width: "100%",
@@ -133,8 +134,6 @@ const styles = {
     margin: "0 0 20px",
     textAlign: "center",
   },
-
-  // NEW SHARE BUTTON STYLE
   shareBtn: {
     background: "#2e7d32",
     color: "#fff",
@@ -147,7 +146,6 @@ const styles = {
     marginBottom: 30,
     transition: "0.2s",
   },
-
   linksContainer: {
     width: "100%",
     maxWidth: 480,
@@ -195,10 +193,16 @@ const styles = {
     color: "#81c784",
     textAlign: "center",
   },
-  as React.CSSProperties
 };
 
-function LinkButton({ link }) {
+interface LinkItem {
+  id: string;
+  label: string;
+  url: string;
+  icon: React.ReactNode;
+}
+
+function LinkButton({ link }: { link: LinkItem }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -220,8 +224,6 @@ function LinkButton({ link }) {
 }
 
 export default function MindCareLinks() {
-
-  // SHARE FUNCTION
   const handleShare = async () => {
     const shareData = {
       title: "Mind Care Psychological Clinic",
@@ -243,7 +245,6 @@ export default function MindCareLinks() {
 
   return (
     <div style={styles.page}>
-      
       {/* Logo */}
       <div style={styles.avatarRing}>
         <img src={logo} alt="Mind Care Logo" style={{ width: 90, height: 90, borderRadius: "50%" }} />
@@ -259,7 +260,7 @@ export default function MindCareLinks() {
         Psychology | Therapy | Wellbeing
       </p>
 
-      {/* NEW SHARE BUTTON */}
+      {/* Share Button */}
       <button style={styles.shareBtn} onClick={handleShare}>
         🔗 Share This Page
       </button>
