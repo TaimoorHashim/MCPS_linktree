@@ -195,6 +195,7 @@ const styles = {
     color: "#81c784",
     textAlign: "center",
   },
+  as React.CSSProperties
 };
 
 function LinkButton({ link }) {
