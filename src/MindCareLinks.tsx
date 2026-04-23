@@ -276,6 +276,8 @@ export default function MindCareLinks() {
       <p style={styles.footer}>
         © {new Date().getFullYear()} Mind Care Psychological Clinic
         <br />
+        creator: Taimoor Hashim
+        <br />
         All rights reserved
       </p>
     </div>
